@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.coop.coop_api.entities.Endereco;
+import com.coop.coop_api.entities.UsuarioOng;
 
-public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
-	String queryUf = "select distinct estado FROM endereco order by estado asc";
-	String queryCidade = "select distinct cidade FROM endereco where estado like :uf order by cidade asc";
+public interface EnderecoRepository extends JpaRepository<UsuarioOng, Integer> {
+	String queryUf = "select distinct estado_local_ong FROM usuario_ong order by estado_local_ong asc";
+	String queryCidade = "select distinct cidade_local_ong FROM usuario_ong where estado_local_ong like :uf order by cidade_local_ong asc";
 	
 	@Query(value = queryUf, nativeQuery = true)
 	List<Object[]> buscarEstados();

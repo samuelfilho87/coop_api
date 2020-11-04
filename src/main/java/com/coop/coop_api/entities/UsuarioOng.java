@@ -23,45 +23,72 @@ public class UsuarioOng {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_ong;
 	
-	@Column
+	@Column(name = "email_ong")
 	private String email;
 	
-	@Column
+	@Column(name = "senha_ong")
 	private String senha;
 	
-	@Column
-	private boolean admin;
+//	@Column
+//	private boolean admin;
 	
 	@Column
 	private String nome_ong;
 	
 	@Column
-	private String nome_completo;
+	private String nome_completo_responsavel;
 	
 	@Column
-	private String cnpj;
+	private String email_responsavel;
 	
 	@Column
-	private String data_nascimento;
+	private String whatsapp_responsavel;
 	
 	@Column
-	private String whatsapp;
+	private String cnpj_ong;
 	
 	@Column
-	private String sobre;
+	private String data_nascimento_responsavel;
 	
 	@Column
-	private String area_atuacao;
+	private String whatsapp_ong;
 	
 	@Column
-	private String funcao;
+	private String sobre_ong;
+	
+	@Column
+	private String area_atuacao_ong;
+	
+	@Column
+	private String funcao_responsavel;
 	
 	@Column
 	private boolean trabalha_ong;
 	
 	@Column
-	private String facebook;
+	private String facebook_ong;
 	
 	@Column
-	private String instagram;
+	private String instagram_ong;
+	
+	@Column
+	private String logradouro_local_ong;
+	
+	@Column
+	private String numero_local_ong;
+	
+	@Column
+	private String complemento_local_ong;
+	
+	@Column
+	private String cep_local_ong;
+
+	@Column
+	private String estado_local_ong;
+	
+	@Column
+	private String cidade_local_ong;
+	
+	@Column
+	private String itens_doacao_requeridos;
 }

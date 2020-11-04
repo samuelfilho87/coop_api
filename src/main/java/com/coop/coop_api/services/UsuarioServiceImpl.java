@@ -43,7 +43,7 @@ public class UsuarioServiceImpl implements UserDetailsService {
 		UsuarioOng usuario = repository.findByEmail(username)
 				.orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado na base de dados."));
 		
-		String[] roles = usuario.isAdmin() ?
+		String[] roles = usuario.isTrabalha_ong() ?
 				new String[] {"ADMIN", "USER"} : new String[] {"USER"};
 				
 		return User
