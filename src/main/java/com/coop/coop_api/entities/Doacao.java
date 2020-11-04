@@ -24,15 +24,15 @@ public class Doacao {
 	private String whatsapp_doador;
 	private int status_doacao;
 	private String itens_doacao;
-	
-	
+
+
 	@ManyToOne
 	@JoinColumn(name = "fk_id_ong")
 	private UsuarioOng ong;
 
-	
+
 	public Doacao() {}
-	
+
 	public Doacao(String nome_completo_doador, Date data_entrega_doador, String email_doador, String whatsapp_doador,
 			int status_doacao, String itens_doacao) {
 		this.nome_completo_doador = nome_completo_doador;
@@ -41,14 +41,14 @@ public class Doacao {
 		this.whatsapp_doador = whatsapp_doador;
 		this.status_doacao = status_doacao;
 		this.itens_doacao = itens_doacao;
-		
+
 	}
-	
+
 
 	public Integer getId_doacao() {
 		return id_doacao;
 	}
-	
+
 	public String getNome_completo_doador() {
 		return nome_completo_doador;
 	}
@@ -96,11 +96,11 @@ public class Doacao {
 	public void setItens_doacao(String itens_doacao) {
 		this.itens_doacao = itens_doacao;
 	}
-	
+
 	public UsuarioOng getOng() {
 		return ong;
 	}
-	
+
 	public void setUsuarioOng(UsuarioOng ong) {
 		this.ong = ong;
 	}

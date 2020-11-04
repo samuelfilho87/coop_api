@@ -23,11 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private JwtService jwtService;
-
-//	public SecurityConfig(UsuarioServiceImpl usuarioService, JwtService jwtService) {
-//		this.jwtService = jwtService;
-//		this.usuarioService = usuarioService;
-//	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -51,7 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()
 			.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/api/usuarios/**")
+				.antMatchers(HttpMethod.POST, "/api/usuarios/**", "/api/enderecos")
+					.permitAll()
+				.antMatchers(HttpMethod.GET, "/api/enderecos/**")
 					.permitAll()
 				.anyRequest().authenticated()
 			.and()
