@@ -8,14 +8,14 @@
 		<version>2.3.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.coop</groupId>
+	<groupId>br.com.coop</groupId>
 	<artifactId>coop_api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>coop_api</name>
-	<description>Projeto integrador do curso Full Stack JAVA Santander Coders - Digital House</description>
+	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
