@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,11 +28,9 @@ public class UsuarioOng {
 	@Column(name = "email_ong")
 	private String email;
 	
+//	@JsonIgnore
 	@Column(name = "senha_ong")
 	private String senha;
-	
-//	@Column
-//	private boolean admin;
 	
 	@Column
 	private String nome_ong;
@@ -83,8 +83,8 @@ public class UsuarioOng {
 	@Column
 	private String cep_local_ong;
 
-	@Column
-	private String estado_local_ong;
+	@Column(name = "estado_local_ong")
+	private String estado;
 	
 	@Column
 	private String cidade_local_ong;
