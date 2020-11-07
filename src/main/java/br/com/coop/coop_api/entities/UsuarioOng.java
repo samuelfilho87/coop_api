@@ -23,7 +23,8 @@ import lombok.NoArgsConstructor;
 public class UsuarioOng {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_ong;
+	@Column(name="id_ong")
+	private Integer id;
 	
 	@Column(name = "email_ong")
 	private String email;

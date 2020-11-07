@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class OngService {
 	public ResponseEntity<Map<String, Object>> getOngs(int pagina, int quantidade) {
 		try {      
 			List<UsuarioOng> ongs = new ArrayList<UsuarioOng>();
-			Pageable paginacao = PageRequest.of(pagina, quantidade);
+			Pageable paginacao = PageRequest.of(pagina, quantidade, Sort.by("id").descending());
 			Page<UsuarioOng> pageOngs = repository.findAll(paginacao);
 			Map<String, Object> response = new HashMap<>();
 			
