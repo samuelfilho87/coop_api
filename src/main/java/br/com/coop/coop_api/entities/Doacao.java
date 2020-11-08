@@ -8,8 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,9 +35,6 @@ public class Doacao {
 	@Column(name = "data_entrega_doacao")
 	private String data_entrega;
 	
-	@Column(name = "email_doador")
-	private String email;
-	
 	@Column(name= "whatsapp_doador")
 	private String whatsapp;
 	
@@ -46,7 +44,7 @@ public class Doacao {
 	@Column(name = "itens_doacao")
 	private String itens;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "fk_id_ong")
 	private UsuarioOng ong;
 
