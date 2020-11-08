@@ -29,6 +29,9 @@ public class Doacao {
 	@Column(name = "nome_completo_doador")
 	private String nome_completo;
 	
+	@Column
+	private String email_doador;
+	
 	@Column(name = "data_entrega_doacao")
 	private String data_entrega;
 	
