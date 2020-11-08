@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,32 +21,26 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "doacao")
-public class Doacao {
+@Table(name = "publicacao_ong")
+public class PublicacaoOng {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_doacao;
+	private Integer id_publicacao;
 	
-	@Column(name = "nome_completo_doador")
-	private String nome_completo;
+	@Column
+	private String titulo_publicacao;
 	
-	@Column(name = "data_entrega_doacao")
-	private String data_entrega;
+	@Column
+	private String imagem_publicacao;
 	
-	@Column(name = "email_doador")
-	private String email;
+	@Column
+	private String data_publicacao;
 	
-	@Column(name= "whatsapp_doador")
-	private String whatsapp;
-	
-	@Column(name = "status_doacao")
-	private String status_doacao;
-	
-	@Column(name = "itens_doacao")
-	private String itens;
-
-	@ManyToOne
+	@Column
+	private String legenda_publicacao;
+		
+	@OneToOne
 	@JoinColumn(name = "fk_id_ong")
 	private UsuarioOng ong;
-
+	
 }
