@@ -58,10 +58,9 @@ CREATE TABLE publicacao_ong (
  
 CREATE TABLE doacao (
     id_doacao INT AUTO_INCREMENT PRIMARY KEY,
-	nome_completo_doador varchar(100) not null,
+    nome_completo_doador varchar(100) not null,
     data_entrega_doacao DATE not null,
-    email_doador varchar(100) not null,
-	whatsapp_doador varchar(100) not null,
+    whatsapp_doador varchar(100) not null,
     status_doacao int not null,
     itens_doacao varchar(100) not null, 
     
