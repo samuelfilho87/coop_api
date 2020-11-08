@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @CrossOrigin
-@RequestMapping("api/doacao")
+@RequestMapping("/api/doacao")
 @RequiredArgsConstructor
 public class DoacaoController {
 
@@ -23,7 +23,8 @@ public class DoacaoController {
 	public Iterable<Doacao> getConsultas(){
 		return doacaoService.getDoacao();
 	}
-	
+
+	@CrossOrigin
 	@PostMapping
 	public Doacao Inserir(@RequestBody Doacao doacao) {
 		doacaoService.Inserir(doacao);
