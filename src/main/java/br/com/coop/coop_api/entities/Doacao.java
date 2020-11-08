@@ -31,9 +31,6 @@ public class Doacao {
 	@Column(name = "data_entrega_doacao")
 	private String data_entrega;
 	
-	@Column(name = "email_doador")
-	private String email;
-	
 	@Column(name= "whatsapp_doador")
 	private String whatsapp;
 	
