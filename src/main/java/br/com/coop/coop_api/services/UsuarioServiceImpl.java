@@ -53,4 +53,6 @@ public class UsuarioServiceImpl implements UserDetailsService {
 				.roles(roles)
 				.build();
 	}
+	
+	
 }

@@ -22,32 +22,42 @@ import br.com.coop.coop_api.repositories.UsuarioOngRepository;
 public class OngService {
 	@Autowired
 	private UsuarioOngRepository repository;
-	
+
 	public ResponseEntity<Map<String, Object>> getOngs(int pagina, int quantidade) {
-		try {      
+		try {
 			List<UsuarioOng> ongs = new ArrayList<UsuarioOng>();
 			Pageable paginacao = PageRequest.of(pagina, quantidade, Sort.by("id").descending());
 			Page<UsuarioOng> pageOngs = repository.findAll(paginacao);
 			Map<String, Object> response = new HashMap<>();
-			
+
 			ongs = pageOngs.getContent();
-			        
+
 			response.put("ongs", ongs);
 			response.put("paginaAtual", pageOngs.getNumber());
 			response.put("totalOngs", pageOngs.getTotalElements());
 			response.put("totalPaginas", pageOngs.getTotalPages());
-			  
+
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	public Optional<UsuarioOng> getOngsPorUf(String uf) {
 		return repository.findByEstado(uf);
 	}
-	
+
 	public Optional<UsuarioOng[]> getOngsPorCidade(String uf, String cidade) {
 		return repository.buscarOngsPorCidade(uf, cidade);
 	}
+
+	public UsuarioOng salvaDoacao(UsuarioOng ong) {
+		repository.save(ong);
+		return ong;
+	}
+
+	public Optional<UsuarioOng> getIdDoacao(int id) {
+		return repository.findById(id);
+	}
+
 }
