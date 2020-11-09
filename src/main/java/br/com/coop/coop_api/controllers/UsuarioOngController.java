@@ -52,4 +52,6 @@ public class UsuarioOngController {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
 		}
 	}
+	
+
 }

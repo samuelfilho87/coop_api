@@ -15,4 +15,5 @@ public interface UsuarioOngRepository extends JpaRepository<UsuarioOng, Integer>
 
 	@Query(value = query, nativeQuery = true)
 	Optional<UsuarioOng[]> buscarOngsPorCidade(String uf, String cidade);
+	
 }
