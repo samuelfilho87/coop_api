@@ -2,6 +2,8 @@ package br.com.coop.coop_api.controllers;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,12 +24,12 @@ public class PublicacaoOngController {
 		return publicacaoOngService.getPublicacaoOng();
 	}
 
-	/*@CrossOrigin
+	@CrossOrigin
 	@PostMapping
-	public Publicacao Inserir(@RequestBody Publicacao publicacao) {
-		publicacaoOngService.Inserir(publicacao);
-		return publicacao;
+	public PublicacaoOng Inserir(@RequestBody PublicacaoOng publicacaoOng) {
+		publicacaoOngService.Inserir(publicacaoOng);
+		return publicacaoOng;
 		
-	}*/
+	}
 
 }
