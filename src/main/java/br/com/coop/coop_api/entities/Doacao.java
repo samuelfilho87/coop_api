@@ -27,22 +27,22 @@ public class Doacao {
 	private Integer id_doacao;
 	
 	@Column(name = "nome_completo_doador")
-	private String nome_completo;
+	private String nomeCompleto;
 	
 	@Column(name = "data_entrega_doacao")
-	private String data_entrega;
+	private String dataEntrega;
 	
 	@Column(name= "whatsapp_doador")
 	private String whatsapp;
 	
 	@Column(name = "status_doacao")
-	private String status_doacao;
+	private String statusEntrega;
 	
 	@Column(name = "itens_doacao")
-	private String itens;
+	private String itensDoacao;
 
 	@OneToOne
 	@JoinColumn(name = "fk_id_ong")
-	private UsuarioOng ong;
+	private UsuarioOng fkOng;
 
 }
