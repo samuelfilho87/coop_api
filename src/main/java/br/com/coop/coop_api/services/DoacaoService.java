@@ -13,7 +13,7 @@ public class DoacaoService {
 	@Autowired
 	private DoacaoRepository repository;
 
-	/*Método de consulta para testar inserção de dados no front end*/
+	/* Método de consulta para testar inserção de dados no front end */
 	public Iterable<Doacao> getDoacao() {
 		return repository.findAll();
 	}
@@ -26,6 +26,10 @@ public class DoacaoService {
 	public List<Object[]> getLista() {
 		return repository.busca();
 
+	}
+
+	public void Delete(int id) {
+		repository.deleteById(id);
 	}
 
 }
