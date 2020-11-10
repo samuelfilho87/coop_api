@@ -63,5 +63,9 @@ public class OngService {
 	public List<Object[]> getDados(){
 		return repository.buscaDadosOng();
 	}
+	
+	public List<Object[]> getItensOng(){
+		return repository.buscaItensOng();
+	}
 
 }

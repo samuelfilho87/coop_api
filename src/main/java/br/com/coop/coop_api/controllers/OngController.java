@@ -70,5 +70,10 @@ public class OngController {
 	public List<Object[]>getDadosOng(){
 		return ongService.getDados();
 	}
+	
+	@GetMapping("/itensOng")
+	public List<Object[]>getItensOng(){
+		return ongService.getItensOng();
+	}
 
 }

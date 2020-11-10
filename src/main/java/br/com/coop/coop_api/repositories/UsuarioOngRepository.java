@@ -17,10 +17,15 @@ public interface UsuarioOngRepository extends JpaRepository<UsuarioOng, Integer>
 	@Query(value = query, nativeQuery = true)
 	Optional<UsuarioOng[]> buscarOngsPorCidade(String uf, String cidade);
 	
-	String queryDadosOng = "SELECT id_ong, email_ong, whatsapp_ong, sobre_ong, area_atuacao_ong, facebook_ong, instagram_ong, "
+	String queryDadosOng = "SELECT id_ong, email_ong, senha_ong, whatsapp_ong, sobre_ong, area_atuacao_ong, facebook_ong, instagram_ong, "
 			+ "logradouro_local_ong, numero_local_ong, complemento_local_ong, cep_local_ong, estado_local_ong, cidade_local_ong	FROM usuario_ong ";
 	
 	@Query(value = queryDadosOng, nativeQuery= true)
-	List<Object[]>buscaDadosOng();
+	List<Object[]> buscaDadosOng();
+	
+	String queryItensOng = "SELECT id_ong, itens_doacao_requeridos FROM usuario_ong ";
+	
+	@Query(value = queryDadosOng, nativeQuery= true)
+	List<Object[]> buscaItensOng();
 	
 }
