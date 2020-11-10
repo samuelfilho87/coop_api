@@ -1,5 +1,6 @@
 package br.com.coop.coop_api.controllers;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -63,6 +64,11 @@ public class OngController {
 
 		return alteraOng;
 
+	}
+	
+	@GetMapping("/dadosOng")
+	public List<Object[]>getDadosOng(){
+		return ongService.getDados();
 	}
 
 }

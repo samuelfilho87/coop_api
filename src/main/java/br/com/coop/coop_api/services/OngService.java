@@ -59,5 +59,9 @@ public class OngService {
 	public Optional<UsuarioOng> getIdDoacao(int id) {
 		return repository.findById(id);
 	}
+	
+	public List<Object[]> getDados(){
+		return repository.buscaDadosOng();
+	}
 
 }
