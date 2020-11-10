@@ -1,7 +1,9 @@
 package br.com.coop.coop_api.controllers;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,11 @@ public class PublicacaoOngController {
 		publicacaoOngService.Inserir(publicacaoOng);
 		return publicacaoOng;
 		
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public void Delete(@PathVariable("id") int id) {
+		publicacaoOngService.Delete(id);
 	}
 
 }

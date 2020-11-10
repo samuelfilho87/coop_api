@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.permitAll()
 				.antMatchers(HttpMethod.PUT, "/api/ongs/**")
 					.permitAll()
-				.antMatchers(HttpMethod.DELETE, "/api/doacao/**") 
+				.antMatchers(HttpMethod.DELETE, "/api/publicacao/**", "/api/doacao/**") 
 				    .permitAll()		
 				.anyRequest().authenticated()
 			.and()
