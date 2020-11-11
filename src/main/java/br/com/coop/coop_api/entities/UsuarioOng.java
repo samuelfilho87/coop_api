@@ -91,5 +91,11 @@ public class UsuarioOng {
 	private String cidade_local_ong;
 	
 	@Column
+	private String latitude;
+	
+	@Column
+	private String longitude;
+	
+	@Column
 	private String itens_doacao_requeridos;
 }
