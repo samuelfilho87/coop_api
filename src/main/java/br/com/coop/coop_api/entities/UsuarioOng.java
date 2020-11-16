@@ -87,8 +87,8 @@ public class UsuarioOng {
 	@Column(name = "estado_local_ong")
 	private String estado;
 	
-	@Column
-	private String cidade_local_ong;
+	@Column(name = "cidade_local_ong")
+	private String cidade;
 	
 	@Column
 	private String latitude;
