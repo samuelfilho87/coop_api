@@ -25,7 +25,8 @@ import lombok.NoArgsConstructor;
 public class PublicacaoOng {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_publicacao;
+	@Column(name="id_publicacao")
+	private Integer id;
 	
 	@Column
 	private String titulo_publicacao;

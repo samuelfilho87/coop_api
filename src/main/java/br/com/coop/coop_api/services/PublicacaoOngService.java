@@ -1,6 +1,7 @@
 package br.com.coop.coop_api.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ public class PublicacaoOngService {
 	
 	@GetMapping
 	public Iterable<PublicacaoOng> getPublicacaoOng(){
-		return repository.findAll();
+		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
 	@PostMapping
