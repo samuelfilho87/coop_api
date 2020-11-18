@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin
 @RequestMapping("/api/imagem")
 @RequiredArgsConstructor
-public class ImagensController {
+public class ImagemController {
 	
 	@GetMapping("/{nomeImagem}")
 	public ResponseEntity<byte[]> getImagem(@PathVariable String nomeImagem) throws IOException {
@@ -28,7 +28,7 @@ public class ImagensController {
 	    f.readFully(b);
 	    final HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.IMAGE_PNG);
-
+	    f.close();
 
 	    return new ResponseEntity<byte[]>(b, headers, HttpStatus.CREATED);
 	}
