@@ -54,5 +54,9 @@ public class UsuarioServiceImpl implements UserDetailsService {
 				.build();
 	}
 	
+	public UsuarioOng Inserir(UsuarioOng usuarioOng) {
+		 repository.save(usuarioOng);
+		 return usuarioOng;
+	}
 	
 }

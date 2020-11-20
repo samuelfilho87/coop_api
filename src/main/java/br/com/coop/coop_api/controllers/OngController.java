@@ -2,7 +2,6 @@ package br.com.coop.coop_api.controllers;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,19 +26,30 @@ public class OngController {
 	private final OngService ongService;
 
 	@GetMapping()
-	public ResponseEntity<Map<String, Object>> getOngs(@RequestParam(defaultValue = "0") int pagina,
-			@RequestParam(defaultValue = "10") int quantidade) {
+	public ResponseEntity<Map<String, Object>> getOngs(
+		@RequestParam(defaultValue = "0") int pagina,
+		@RequestParam(defaultValue = "10") int quantidade) {
+		
 		return ongService.getOngs(pagina, quantidade);
 	}
-
+	
 	@GetMapping("/{uf}")
-	public Optional<UsuarioOng> getOngsPorUf(@PathVariable String uf) {
-		return ongService.getOngsPorUf(uf);
+	public ResponseEntity<Map<String, Object>> getOngsPorUf(
+		@PathVariable String uf,
+		@RequestParam(defaultValue = "0") int pagina,
+		@RequestParam(defaultValue = "10") int quantidade) {
+		
+		return ongService.getOngsPorUf(uf, pagina, quantidade);
 	}
-
+	
 	@GetMapping("/{uf}/{cidade}")
-	public Optional<UsuarioOng[]> getOngsPorUf(@PathVariable String uf, @PathVariable String cidade) {
-		return ongService.getOngsPorCidade(uf, cidade);
+	public ResponseEntity<Map<String, Object>> getOngsPorCidade(
+		@PathVariable String uf,
+		@PathVariable String cidade,
+		@RequestParam(defaultValue = "0") int pagina,
+		@RequestParam(defaultValue = "10") int quantidade) {
+		
+		return ongService.getOngsPorCidade(uf, cidade, pagina, quantidade);
 	}
 
 	@PutMapping("/edita/{id}")
@@ -58,7 +68,7 @@ public class OngController {
 		ongBD.setComplemento_local_ong(ong.getComplemento_local_ong());
 		ongBD.setCep_local_ong(ong.getCep_local_ong());
 		ongBD.setEstado(ong.getEstado());
-		ongBD.setCidade_local_ong(ong.getCidade_local_ong());
+		ongBD.setCidade(ong.getCidade());
 
 		final UsuarioOng alteraOng = ongService.salvaDoacao(ongBD);
 

@@ -87,8 +87,14 @@ public class UsuarioOng {
 	@Column(name = "estado_local_ong")
 	private String estado;
 	
+	@Column(name = "cidade_local_ong")
+	private String cidade;
+	
 	@Column
-	private String cidade_local_ong;
+	private String latitude;
+	
+	@Column
+	private String longitude;
 	
 	@Column
 	private String itens_doacao_requeridos;

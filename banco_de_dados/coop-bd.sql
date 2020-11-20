@@ -29,6 +29,8 @@ CREATE TABLE usuario_ong (
     cep_local_ong varchar(20) not null, 
     estado_local_ong char(2) not null, 
     cidade_local_ong varchar(60) not null
+    latitude varchar(60) not null
+    longitude varchar(60) not null
 );
 
 CREATE TABLE imagem_ong (

@@ -41,13 +41,46 @@ public class OngService {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	public ResponseEntity<Map<String, Object>> getOngsPorUf(String uf, int pagina, int quantidade) {
+		try {
+			List<UsuarioOng> ongs = new ArrayList<UsuarioOng>();
+			Pageable paginacao = PageRequest.of(pagina, quantidade, Sort.by("id").descending());
+			Page<UsuarioOng> pageOngs = repository.findByEstado(uf, paginacao);
+			Map<String, Object> response = new HashMap<>();
 
-	public Optional<UsuarioOng> getOngsPorUf(String uf) {
-		return repository.findByEstado(uf);
+			ongs = pageOngs.getContent();
+
+			response.put("ongs", ongs);
+			response.put("paginaAtual", pageOngs.getNumber());
+			response.put("totalOngs", pageOngs.getTotalElements());
+			response.put("totalPaginas", pageOngs.getTotalPages());
+
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
+	
+	public ResponseEntity<Map<String, Object>> getOngsPorCidade(String uf, String cidade, int pagina, int quantidade) {
+		try {
+			List<UsuarioOng> ongs = new ArrayList<UsuarioOng>();
+			Pageable paginacao = PageRequest.of(pagina, quantidade, Sort.by("id").descending());
+//			Page<UsuarioOng> pageOngs = repository.buscarOngsPorCidade(cidade, paginacao);
+			Page<UsuarioOng> pageOngs = repository.findByEstadoAndCidade(uf, cidade, paginacao);
+			Map<String, Object> response = new HashMap<>();
 
-	public Optional<UsuarioOng[]> getOngsPorCidade(String uf, String cidade) {
-		return repository.buscarOngsPorCidade(uf, cidade);
+			ongs = pageOngs.getContent();
+
+			response.put("ongs", ongs);
+			response.put("paginaAtual", pageOngs.getNumber());
+			response.put("totalOngs", pageOngs.getTotalElements());
+			response.put("totalPaginas", pageOngs.getTotalPages());
+
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	public UsuarioOng salvaDoacao(UsuarioOng ong) {

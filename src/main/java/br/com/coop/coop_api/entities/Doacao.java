@@ -1,5 +1,7 @@
 package br.com.coop.coop_api.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +31,7 @@ public class Doacao {
 	private String nomeCompleto;
 	
 	@Column(name = "data_entrega_doacao")
-	private String dataEntrega;
+	private Date dataEntrega;
 	
 	@Column(name= "whatsapp_doador")
 	private String whatsapp;
