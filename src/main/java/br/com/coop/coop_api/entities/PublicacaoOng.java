@@ -31,6 +31,9 @@ public class PublicacaoOng {
 	private String titulo_publicacao;
 	
 	@Column
+	private Integer visualizacoes;
+	
+	@Column
 	private String imagem_publicacao;
 	
 	@Column

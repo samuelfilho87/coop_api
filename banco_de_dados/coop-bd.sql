@@ -45,6 +45,7 @@ CREATE TABLE imagem_ong (
 
 CREATE TABLE publicacao_ong (
     id_publicacao INT AUTO_INCREMENT PRIMARY KEY,
+    visualizacoes INT,
     titulo_publicacao varchar(100) not null,
     imagem_publicacao varchar(100) not null,
     data_publicacao DATE not null,
@@ -61,7 +62,7 @@ CREATE TABLE doacao (
     nome_completo_doador varchar(100) not null,
     data_entrega_doacao DATE not null,
     whatsapp_doador varchar(100) not null,
-    status_doacao int not null,
+    status_doacao varchar(100) not null,
     itens_doacao varchar(100) not null, 
     
     fk_id_ong int not null,
@@ -79,13 +80,13 @@ cidade_local_ong) VALUES('ONG Ação Vida', '00.806.666/0001-31', 'Ong destinada
 
 INSERT INTO imagem_ong (imagem_ong_1, imagem_ong_2, fk_id_ong) VALUES('images/img_1.jpg', 'images/img_2.jpg', 1);
 
-INSERT INTO publicacao_ong (titulo_publicacao, legenda_publicacao, imagem_publicacao, data_publicacao, fk_id_ong)
-VALUES ('Ação de Carnaval', 'Ong é uma plataforma gratuíta que conecta pessoas à ONGs
+INSERT INTO publicacao_ong (titulo_publicacao, visualizacoes, legenda_publicacao, imagem_publicacao, data_publicacao, fk_id_ong)
+VALUES ('Ação de Carnaval', 0, 'Ong é uma plataforma gratuíta que conecta pessoas à ONGs
 dentro de um só lugar. Ajudando diversas ONGs a continuarem com seus trabalhos sociais, através da
 doação dos nossos usuários.', 'images/ONGTAL/img_1.jpg', '2020-10-27', 1);
 
-INSERT INTO doacao (nome_completo_doador, email_doador, whatsapp_doador, itens_doacao, status_doacao, data_entrega_doacao, fk_id_ong)
-VALUES ('Maria Eduarda Silva', 'mes@gmail.com', '(22) 9 2222-2222', 'Dinheiro, Material higiene', 'Aguardando', '2020-10-27', 1);
+INSERT INTO doacao (nome_completo_doador, whatsapp_doador, itens_doacao, status_doacao, data_entrega_doacao, fk_id_ong)
+VALUES ('Maria Eduarda Silva', '(22) 92222-2222', 'Dinheiro, Material higiene', 'Aguardando', '2020-10-27', 1);
 
 
 SELECT * FROM usuario_ong;

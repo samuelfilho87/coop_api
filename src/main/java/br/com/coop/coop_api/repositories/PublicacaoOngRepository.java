@@ -9,7 +9,7 @@ import br.com.coop.coop_api.entities.PublicacaoOng;
 
 public interface PublicacaoOngRepository extends CrudRepository<PublicacaoOng, Integer> {
 
-	String query = "select id_publicacao, titulo_publicacao, imagem_publicacao, data_publicacao, legenda_publicacao from coop_bd.doacao";
+	String query = "select id_publicacao, titulo_publicacao, visualizacoes, imagem_publicacao, data_publicacao, legenda_publicacao from coop_bd.doacao";
 	@Query (value = query, nativeQuery = true)
 	List<Object[]> busca();
 
