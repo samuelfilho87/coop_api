@@ -41,6 +41,14 @@ public class DoacaoController {
 
 		return doacaoService.getDoacoes(Integer.parseInt(idOng), pagina, quantidade);
 	}
+	
+	@GetMapping("/{idOng}/total")
+	public Long getDoacoesTotalStatus(
+		@PathVariable String idOng,
+		@RequestParam(defaultValue = "Aguardando") String status) {
+
+		return doacaoService.getDoacoesTotalStatus(Integer.parseInt(idOng), status);
+	}
 
 	@CrossOrigin
 	@PostMapping

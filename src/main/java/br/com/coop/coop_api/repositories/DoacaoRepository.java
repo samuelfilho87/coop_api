@@ -19,4 +19,7 @@ public interface DoacaoRepository extends JpaRepository<Doacao, Integer> {
 	@Query (value = query2, nativeQuery = true)
 	Page<Doacao> findByFkOng(int idOng, Pageable paginacao);
 
+	String query3 = "select count(*) from doacao where fk_id_ong = :idOng and status_doacao = :status";
+	@Query (value = query3, nativeQuery = true)
+	Long countByStatusEntrega(int idOng, String status);
 }

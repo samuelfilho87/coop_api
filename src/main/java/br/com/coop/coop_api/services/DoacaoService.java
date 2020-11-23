@@ -46,6 +46,10 @@ public class DoacaoService {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	public Long getDoacoesTotalStatus(int idOng, String status) {		
+		return repository.countByStatusEntrega(idOng, status);
+	}
 
 	public Doacao Inserir(Doacao doacao) {
 		repository.save(doacao);
