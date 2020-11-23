@@ -24,11 +24,6 @@ public class PublicacaoOngService {
 	@Autowired
 	private PublicacaoOngRepository repository;
 	
-//	@GetMapping
-//	public Iterable<PublicacaoOng> getPublicacaoOng(){
-//		return repository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-//	}
-	
 	public ResponseEntity<Map<String, Object>> getPublicacaoOng(int pagina, int quantidade) {
 		try {
 			List<PublicacaoOng> publicacoes = new ArrayList<PublicacaoOng>();

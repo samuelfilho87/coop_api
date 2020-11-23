@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TokenDTO {
+	private int id;
 	private String email;
 	private String token;
 }

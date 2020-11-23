@@ -38,6 +38,13 @@ public class UsuarioServiceImpl implements UserDetailsService {
 		throw new SenhaInvalidaException();
 	}
 	
+	public int getIdUsuarioLogado(String email) {
+		UsuarioOng usuario = repository.findByEmail(email)
+				.orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado na base de dados."));
+		
+		return usuario.getId();
+	}
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UsuarioOng usuario = repository.findByEmail(username)

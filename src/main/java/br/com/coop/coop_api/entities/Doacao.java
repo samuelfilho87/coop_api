@@ -25,7 +25,8 @@ import lombok.NoArgsConstructor;
 public class Doacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id_doacao;
+	@Column(name = "id_doacao")
+	private Integer id;
 	
 	@Column(name = "nome_completo_doador")
 	private String nomeCompleto;
@@ -45,5 +46,4 @@ public class Doacao {
 	@OneToOne
 	@JoinColumn(name = "fk_id_ong")
 	private UsuarioOng fkOng;
-
 }

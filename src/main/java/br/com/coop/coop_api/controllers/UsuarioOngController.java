@@ -43,11 +43,13 @@ public class UsuarioOngController {
 					.email(credenciais.getEmail())
 					.senha(credenciais.getSenha()).build();
 			
+			System.out.println(usuario);
+			
 			usuarioService.autenticar(usuario);
 			
 			String token = jwtService.gerarToken(usuario);
 			
-			return new TokenDTO(usuario.getEmail(), token);
+			return new TokenDTO(usuarioService.getIdUsuarioLogado(usuario.getEmail()), usuario.getEmail(), token);
 		} catch(UsernameNotFoundException | SenhaInvalidaException e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
 		}
