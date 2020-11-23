@@ -45,6 +45,6 @@ public class PublicacaoOng {
 		
 	@OneToOne
 	@JoinColumn(name = "fk_id_ong")
-	private UsuarioOng ong;
+	private UsuarioOng fkOng;
 	
 }
