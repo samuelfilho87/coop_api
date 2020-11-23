@@ -21,11 +21,6 @@ import br.com.coop.coop_api.repositories.DoacaoRepository;
 public class DoacaoService {
 	@Autowired
 	private DoacaoRepository repository;
-
-	/* Método de consulta para testar inserção de dados no front end */
-	public Iterable<Doacao> getDoacao() {
-		return repository.findAll();
-	}
 	
 	public ResponseEntity<Map<String, Object>> getDoacoes(int idOng, int pagina, int quantidade) {
 		try {
@@ -54,16 +49,7 @@ public class DoacaoService {
 	public Doacao Inserir(Doacao doacao) {
 		repository.save(doacao);
 		return doacao;
-	}
-
-	public List<Object[]> getLista() {
-		return repository.busca();
-
-	}
-
-	public void Delete(int id) {
-		repository.deleteById(id);
-	}
+	}	
 	
 	public Doacao EditaItensDoacoes(Doacao doacao) {
 		repository.save(doacao);
@@ -73,5 +59,9 @@ public class DoacaoService {
 	public Optional<Doacao>getIdItens(int id){
 		return repository.findById(id);
 	}
-
+	
+	public Optional<Doacao>getIdDoacao(int id){
+		return repository.findById(id);
+	}
+	
 }

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
 import br.com.coop.coop_api.entities.UsuarioOng;
 import br.com.coop.coop_api.repositories.UsuarioOngRepository;
 
@@ -92,17 +93,13 @@ public class OngService {
 		return repository.findById(id);
 	}
 	
-	public List<Object[]> getDados(){
-		return repository.buscaDadosOng();
-	}
 	
 	public UsuarioOng Inserir(UsuarioOng usuarioOng) {
 		repository.save(usuarioOng);
 		return usuarioOng;
 	}
 	
-	public List<Object[]> getItensOng(){
-		return repository.buscaItensOng();
+	public Optional<UsuarioOng>getIdOng(int id){
+		return repository.findById(id);
 	}
-
 }

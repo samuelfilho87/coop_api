@@ -1,11 +1,10 @@
 package br.com.coop.coop_api.controllers;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,12 +26,6 @@ public class DoacaoController {
 
 	private final DoacaoService doacaoService;
 
-	/* Método de consulta para testar inserção de dados no front end */
-	@GetMapping
-	public Iterable<Doacao> getConsultas() {
-		return doacaoService.getDoacao();
-	}
-	
 	@GetMapping("/{idOng}")
 	public ResponseEntity<Map<String, Object>> getDoacoesOng(
 		@PathVariable String idOng,
@@ -57,16 +50,6 @@ public class DoacaoController {
 		return doacao;
 
 	}
-
-	@GetMapping("/lista")
-	public List<Object[]> getLista() {
-		return doacaoService.getLista();
-	}
-
-	@DeleteMapping("/delete/{id}")
-	public void Delete(@PathVariable("id") int id) {
-		doacaoService.Delete(id);
-	}
 	
 	@PutMapping("/edita/{id}")
 	public Doacao alterarItensDoacao(@PathVariable("id") int id, @RequestBody Doacao doacao) throws Exception {
@@ -77,6 +60,11 @@ public class DoacaoController {
 		final Doacao alteraItens = doacaoService.EditaItensDoacoes(doacaoOng);
 		
 		return alteraItens;
+	}
+	
+	@GetMapping("/listadoacoes/{id}")
+	public Optional<Doacao> getById(@PathVariable Integer id){
+		return doacaoService.getIdDoacao(id);
 	}
 	
 

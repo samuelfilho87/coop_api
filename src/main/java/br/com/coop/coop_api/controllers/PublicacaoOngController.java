@@ -1,6 +1,7 @@
 package br.com.coop.coop_api.controllers;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -43,6 +44,11 @@ public class PublicacaoOngController {
 	@DeleteMapping("/delete/{id}")
 	public void Delete(@PathVariable("id") int id) {
 		publicacaoOngService.Delete(id);
+	}
+	
+	@GetMapping("/listapublicacoes/{id}")
+	public Optional<PublicacaoOng> getById(@PathVariable Integer id){
+		return publicacaoOngService.getIdPublicacoes(id);
 	}
 
 }

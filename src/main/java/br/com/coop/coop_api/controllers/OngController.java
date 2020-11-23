@@ -1,7 +1,7 @@
 package br.com.coop.coop_api.controllers;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -76,14 +76,9 @@ public class OngController {
 
 	}
 	
-	@GetMapping("/dadosOng")
-	public List<Object[]>getDadosOng(){
-		return ongService.getDados();
+	@GetMapping("/listaOng/{id}")
+	public Optional<UsuarioOng> getById(@PathVariable Integer id){
+		return ongService.getIdOng(id);
 	}
 	
-	@GetMapping("/itensOng")
-	public List<Object[]>getItensOng(){
-		return ongService.getItensOng();
-	}
-
 }
