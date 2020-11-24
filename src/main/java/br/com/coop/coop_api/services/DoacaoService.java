@@ -51,7 +51,7 @@ public class DoacaoService {
 		return doacao;
 	}	
 	
-	public Doacao EditaItensDoacoes(Doacao doacao) {
+	public Doacao atualizaStatusEntrega(Doacao doacao) {
 		repository.save(doacao);
 		return doacao;
 	}

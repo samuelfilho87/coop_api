@@ -55,10 +55,4 @@ public class UsuarioOngController {
 		}
 	}
 	
-	@PostMapping("/cadastrar")
-	public UsuarioOng CadastraUsuario(@RequestBody UsuarioOng usuarioOng) {
-		usuarioService.Inserir(usuarioOng);
-		return usuarioOng;
-	}
-
 }

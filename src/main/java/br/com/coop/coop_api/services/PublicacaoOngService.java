@@ -42,6 +42,26 @@ public class PublicacaoOngService {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	public ResponseEntity<Map<String, Object>> getPublicacaoOngEspecifica(int idOng, int pagina, int quantidade) {
+		try {
+			List<PublicacaoOng> publicacoes = new ArrayList<PublicacaoOng>();
+			Pageable paginacao = PageRequest.of(pagina, quantidade);
+			Page<PublicacaoOng> pagePublicacoes = repository.findByFkOng(idOng, paginacao);
+			Map<String, Object> response = new HashMap<>();
+
+			publicacoes = pagePublicacoes.getContent();
+
+			response.put("publicacacoes", publicacoes);
+			response.put("paginaAtual", pagePublicacoes.getNumber());
+			response.put("totalDoacoes", pagePublicacoes.getTotalElements());
+			response.put("totalPaginas", pagePublicacoes.getTotalPages());
+
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 	public PublicacaoOng Inserir(PublicacaoOng publicacaoOng) {
 		repository.save(publicacaoOng);
@@ -53,6 +73,19 @@ public class PublicacaoOngService {
 	}
 	
 	public Optional<PublicacaoOng>getIdPublicacoes(int id){
+		return repository.findById(id);
+	}
+	
+	public Long getTotalPublicacoes(int idOng) {		
+		return repository.countByPublicacoes(idOng);
+	}
+	
+	public PublicacaoOng atualizaVisualizacao(PublicacaoOng publicacaoOng) {
+		repository.save(publicacaoOng);
+		return publicacaoOng;
+	}
+	
+	public Optional<PublicacaoOng>getIdItens(int id){
 		return repository.findById(id);
 	}
 	
