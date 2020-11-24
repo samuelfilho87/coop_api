@@ -62,6 +62,15 @@ public class DoacaoController {
 		return alteraItens;
 	}
 	
+	@PostMapping("/alterar-status/{id}")
+	public Doacao alterarStatusDoacao(@PathVariable("id") int id, @RequestBody Doacao doacao) throws Exception {
+		Doacao doacaoOng = doacaoService.getIdItens(id).orElseThrow(() -> new IllegalAccessException());
+		
+		doacaoOng.setStatusEntrega(doacao.getStatusEntrega());
+		
+		return doacaoService.alterarStatusDoacao(doacaoOng);
+	}
+	
 	@GetMapping("/listadoacoes/{id}")
 	public Optional<Doacao> getById(@PathVariable Integer id){
 		return doacaoService.getIdDoacao(id);

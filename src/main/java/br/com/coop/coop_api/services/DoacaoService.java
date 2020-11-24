@@ -56,6 +56,11 @@ public class DoacaoService {
 		return doacao;
 	}
 	
+	public Doacao alterarStatusDoacao(Doacao doacao) {
+		repository.save(doacao);
+		return doacao;
+	}
+	
 	public Optional<Doacao>getIdItens(int id){
 		return repository.findById(id);
 	}
