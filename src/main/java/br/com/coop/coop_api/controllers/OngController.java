@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,9 +57,9 @@ public class OngController {
 		return ongService.getOngsPorCidade(uf, cidade, pagina, quantidade);
 	}
 
-	@PutMapping("/edita/{id}")
+	@PostMapping("/altera-dados-ong/{id}")
 	public UsuarioOng alteraDadosOng(@PathVariable("id") int id, @RequestBody UsuarioOng ong) throws Exception {
-		UsuarioOng ongBD = ongService.getIdDoacao(id).orElseThrow(() -> new IllegalAccessException());
+		UsuarioOng ongBD = ongService.getIdDadosOng(id).orElseThrow(() -> new IllegalAccessException());
 
 		ongBD.setEmail(ong.getEmail());
 		ongBD.setSenha(ong.getSenha());
@@ -92,11 +91,6 @@ public class OngController {
 
 		return alteraOng;
 
-	}
-	
-	@GetMapping("/listaOng/{id}")
-	public Optional<UsuarioOng> getById(@PathVariable Integer id){
-		return ongService.getIdOng(id);
 	}
 	
 }

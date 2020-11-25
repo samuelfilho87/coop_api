@@ -89,10 +89,9 @@ public class OngService {
 		return ong;
 	}
 
-	public Optional<UsuarioOng> getIdDoacao(int id) {
+	public Optional<UsuarioOng> getIdDadosOng(int id) {
 		return repository.findById(id);
 	}
-	
 	
 	public UsuarioOng Inserir(UsuarioOng usuarioOng) {
 		repository.save(usuarioOng);
