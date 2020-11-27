@@ -52,7 +52,7 @@ public class PublicacaoOngService {
 
 			publicacoes = pagePublicacoes.getContent();
 
-			response.put("publicacacoes", publicacoes);
+			response.put("publicacoes", publicacoes);
 			response.put("paginaAtual", pagePublicacoes.getNumber());
 			response.put("totalDoacoes", pagePublicacoes.getTotalElements());
 			response.put("totalPaginas", pagePublicacoes.getTotalPages());
@@ -78,6 +78,14 @@ public class PublicacaoOngService {
 	
 	public Long getTotalPublicacoes(int idOng) {		
 		return repository.countByPublicacoes(idOng);
+	}
+	
+	public Long getTotalVisualizacoes(int idOng) {		
+		return repository.countByVisualizacoes(idOng);
+	}
+	
+	public Long getMediaVisualizacoes(int idOng) {		
+		return repository.avgByVisualizacoes(idOng);
 	}
 	
 	public PublicacaoOng atualizaVisualizacao(PublicacaoOng publicacaoOng) {

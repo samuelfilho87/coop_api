@@ -23,4 +23,11 @@ public interface PublicacaoOngRepository extends JpaRepository<PublicacaoOng, In
 	@Query (value = query3, nativeQuery = true)
 	Long countByPublicacoes(int idOng);
 
+	String query4 = "select sum(visualizacoes) from publicacao_ong where fk_id_ong = :idOng";
+	@Query (value = query4, nativeQuery = true)
+	Long countByVisualizacoes(int idOng);
+	
+	String query5 = "select avg(visualizacoes) from publicacao_ong where fk_id_ong = :idOng";
+	@Query (value = query5, nativeQuery = true)
+	Long avgByVisualizacoes(int idOng);
 }

@@ -1,5 +1,9 @@
 package br.com.coop.coop_api.config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -16,6 +20,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import br.com.coop.coop_api.services.JwtService;
 import br.com.coop.coop_api.services.UsuarioServiceImpl;
@@ -45,6 +50,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.passwordEncoder(passwordEncoder());
 	}
 	
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+	    List<String> allowedOriginsUrl = new ArrayList<>();
+	    allowedOriginsUrl.add("http://localhost:3000");
+	    allowedOriginsUrl.add("http://127.0.0.1:3000");
+	    CorsConfiguration config = new CorsConfiguration();
+	    config.setAllowCredentials(true);
+
+	    config.setAllowedOrigins(allowedOriginsUrl);
+	    config.addAllowedHeader("*");
+	    config.addAllowedMethod("*");
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", config);
+	    return source;
+	}
+	
+//	@Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+//        return source;
+//    }
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -69,11 +97,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				.addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
-	
-	@Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
-    }
 }

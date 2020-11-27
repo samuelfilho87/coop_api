@@ -61,8 +61,9 @@ public class OngController {
 	public UsuarioOng alteraDadosOng(@PathVariable("id") int id, @RequestBody UsuarioOng ong) throws Exception {
 		UsuarioOng ongBD = ongService.getIdDadosOng(id).orElseThrow(() -> new IllegalAccessException());
 
+		ongBD.setNome_ong(ong.getNome_ong());
+		ongBD.setCnpj_ong(ong.getCnpj_ong());
 		ongBD.setEmail(ong.getEmail());
-		ongBD.setSenha(ong.getSenha());
 		ongBD.setWhatsapp_ong(ong.getWhatsapp_ong());
 		ongBD.setSobre_ong(ong.getSobre_ong());
 		ongBD.setArea_atuacao_ong(ong.getArea_atuacao_ong());

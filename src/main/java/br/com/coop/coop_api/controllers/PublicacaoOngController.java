@@ -20,7 +20,7 @@ import br.com.coop.coop_api.services.PublicacaoOngService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/publicacao")
 @RequiredArgsConstructor
 public class PublicacaoOngController {
@@ -59,6 +59,20 @@ public class PublicacaoOngController {
 
 		return publicacaoOngService.getTotalPublicacoes(Integer.parseInt(idOng));
 	}
+	
+	/* GET total de visualizações das publicações referentes à ONG cujo id foi passado na url */
+	@GetMapping("/{idOng}/total-visualizacoes")
+	public Long getTotalVisualizacoes(@PathVariable String idOng) {
+
+		return publicacaoOngService.getTotalVisualizacoes(Integer.parseInt(idOng));
+	}
+	
+	/* GET média de visualizações das publicações referentes à ONG cujo id foi passado na url */
+	@GetMapping("/{idOng}/media-visualizacoes")
+	public Long getMediaVisualizacoes(@PathVariable String idOng) {
+
+		return publicacaoOngService.getMediaVisualizacoes(Integer.parseInt(idOng));
+	}
 
 	/* POST publicacao na tabela de publicações */
 	@PostMapping
@@ -81,6 +95,7 @@ public class PublicacaoOngController {
 	}
 	
 	/* DELETE publicação cujo id foi passado na url */
+	@CrossOrigin(origins = "http://localhost:3000")
 	@DeleteMapping("/delete/{id}")
 	public void Delete(@PathVariable("id") int id) {
 		
