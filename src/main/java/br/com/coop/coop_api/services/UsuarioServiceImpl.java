@@ -75,7 +75,7 @@ public class UsuarioServiceImpl implements UserDetailsService {
 		return repository.findByEmail(email);
 	}
 
-	 public void recoverPassword(ForgottenPasswordDTO dto) {
+	   public void recoverPassword(ForgottenPasswordDTO dto) {
 	    	Optional<UsuarioOng> userOpt = repository.findByEmail(dto.getLogin());
 	    	if(userOpt.isPresent()) {
 	    		UsuarioOng user = userOpt.get();
@@ -83,9 +83,9 @@ public class UsuarioServiceImpl implements UserDetailsService {
 	    		
 	    		Mail mail = new Mail();
 	    		mail.setTo(dto.getLogin());
-	    		mail.setSubject("Recuperação de senha - coop.com.br");
+	    		mail.setSubject("Recuperação de senha - Coop.com.br");
 	    		emailService.sendEmail(mail, token);
 	    	}
-	  }
+	    }
 	
 }
