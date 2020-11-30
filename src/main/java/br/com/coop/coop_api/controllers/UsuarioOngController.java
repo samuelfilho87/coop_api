@@ -1,9 +1,9 @@
 package br.com.coop.coop_api.controllers;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.coop.coop_api.dto.AlterarSenhaDTO;
 import br.com.coop.coop_api.dto.CredenciaisDTO;
+import br.com.coop.coop_api.dto.ForgottenPasswordDTO;
 import br.com.coop.coop_api.dto.TokenDTO;
 import br.com.coop.coop_api.entities.UsuarioOng;
 import br.com.coop.coop_api.exceptions.SenhaInvalidaException;
@@ -58,7 +59,7 @@ public class UsuarioOngController {
 		}
 	}
 	
-	@PostMapping("/alterar-senha")
+	@PutMapping("/alterar-senha")
 	public boolean alterarSenha(@RequestBody AlterarSenhaDTO senhas) throws Exception {
 		try {
 			// Verifica se a senha está correta
@@ -99,4 +100,10 @@ public class UsuarioOngController {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
 		}
 	}	
+
+	@PostMapping("/forgot-password")
+    public ResponseEntity<?> generateAuthenticatedLink(@RequestBody ForgottenPasswordDTO data) throws UsernameNotFoundException {
+    	usuarioService.recoverPassword(data);
+    	return ResponseEntity.noContent().build();
+    }
 }
