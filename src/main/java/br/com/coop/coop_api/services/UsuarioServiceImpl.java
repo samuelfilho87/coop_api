@@ -1,6 +1,8 @@
 package br.com.coop.coop_api.services;
 
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -59,6 +61,10 @@ public class UsuarioServiceImpl implements UserDetailsService {
 				.password(usuario.getSenha())
 				.roles(roles)
 				.build();
+	}
+	
+	public Optional<UsuarioOng> getUser(String email) {
+		return repository.findByEmail(email);
 	}
 	
 }
