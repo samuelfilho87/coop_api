@@ -122,10 +122,10 @@ public class PublicacaoOngController {
 	
 	/* PUT alterando a quantidade de visualização da publicação cujo id foi passado na url */
 	@PutMapping("/visualizacoes/{id}")
-	public PublicacaoOng quantidadeVisualizacoes(@PathVariable("id") int id, @RequestBody PublicacaoOng publicacaoOng) throws Exception {
+	public PublicacaoOng quantidadeVisualizacoes(@PathVariable("id") int id) throws Exception {
 		PublicacaoOng publicacao = publicacaoOngService.getIdItens(id).orElseThrow(() -> new IllegalAccessException());
 		
-		publicacao.setVisualizacoes(publicacaoOng.getVisualizacoes());
+		publicacao.setVisualizacoes(publicacao.getVisualizacoes() + 1);
 		
 		final PublicacaoOng atualizaVisualizacao = publicacaoOngService.atualizaVisualizacao(publicacao);
 		
