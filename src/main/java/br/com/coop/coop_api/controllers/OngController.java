@@ -1,20 +1,26 @@
 package br.com.coop.coop_api.controllers;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.coop.coop_api.entities.UsuarioOng;
 import br.com.coop.coop_api.services.OngService;
+import br.com.coop.coop_api.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -91,7 +97,33 @@ public class OngController {
 		final UsuarioOng alteraOng = ongService.salvaDoacao(ongBD);
 
 		return alteraOng;
-
 	}
 	
+	@PutMapping("/logo/{id}")
+	public String saveLogo(@PathVariable("id") int id, @RequestParam("logo") MultipartFile multipartFile) throws Exception {
+		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		Date date = new Date();
+		String filePrefix = date.getTime() + "-";
+		String uploadDir = "files";
+		fileName = filePrefix + fileName;
+		try {
+			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("O arquivo não foi salvo");
+			return "Error";
+		}
+		System.out.println("O arquivo foi salvo!");
+		
+		// Salva URL no BD
+		String url = "http://localhost:8080/api/imagem/" + fileName;
+		
+		UsuarioOng ongBD = ongService.getIdOng(id).orElseThrow(() -> new IllegalAccessException());
+
+		ongBD.setLogo(url);
+
+		ongService.salvaDoacao(ongBD);
+
+		return url;
+	}
 }

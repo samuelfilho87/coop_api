@@ -98,4 +98,7 @@ public class UsuarioOng {
 	
 	@Column
 	private String itens_doacao_requeridos;
+	
+	@Column
+	private String logo;
 }

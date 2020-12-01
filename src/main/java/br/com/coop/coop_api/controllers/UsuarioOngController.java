@@ -41,7 +41,7 @@ public class UsuarioOngController {
 	}
 	
 	@PostMapping("/auth")
-	public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais) {
+	public TokenDTO autenticar(@RequestBody CredenciaisDTO credenciais) throws Exception {
 		try {
 			UsuarioOng usuario = UsuarioOng.builder()
 					.email(credenciais.getEmail())
@@ -53,7 +53,9 @@ public class UsuarioOngController {
 			
 			String token = jwtService.gerarToken(usuario);
 			
-			return new TokenDTO(usuarioService.getIdUsuarioLogado(usuario.getEmail()), usuario.getEmail(), token);
+			UsuarioOng usuarioLogado = usuarioService.getUser(credenciais.getEmail()).orElseThrow(() -> new IllegalAccessException());
+			
+			return new TokenDTO(usuarioLogado.getId(), usuarioLogado.getEmail(), token);
 		} catch(UsernameNotFoundException | SenhaInvalidaException e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
 		}
@@ -67,39 +69,22 @@ public class UsuarioOngController {
 					.email(senhas.getEmail())
 					.senha(senhas.getSenha()).build();
 			
-			System.out.println("****************************");
-			System.out.println(usuario);
-			System.out.println("****************************");
-			
 			usuarioService.autenticar(usuario);
 			
-			System.out.println("****************************");
-			System.out.println("Autenticado");
-			System.out.println("****************************");
-			
-			// Senhas está correta, nova senha é criptografada e salva.
+			// Senha está correta, nova senha é criptografada e salva.
 			UsuarioOng usuarioNovaSenha = usuarioService.getUser(senhas.getEmail()).orElseThrow(() -> new IllegalAccessException());
 			
 			String novaSenhaCriptografada = passwordEncoder.encode(senhas.getNovaSenha());
 			
 			usuarioNovaSenha.setSenha(novaSenhaCriptografada);
 			
-			
-			System.out.println("****************************");
-			System.out.println(usuarioNovaSenha);
-			System.out.println("****************************");
-			
 			usuarioService.salvar(usuarioNovaSenha);
-			
-			System.out.println("****************************");
-			System.out.println("Salvo");
-			System.out.println("****************************");
 			
 			return true;
 		} catch(UsernameNotFoundException | SenhaInvalidaException e) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
 		}
-	}	
+	}
 
 	@PostMapping("/forgot-password")
     public ResponseEntity<?> generateAuthenticatedLink(@RequestBody ForgottenPasswordDTO data) throws UsernameNotFoundException {

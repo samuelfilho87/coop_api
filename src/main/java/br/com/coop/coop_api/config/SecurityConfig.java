@@ -80,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.cors().and()
 			.csrf().disable()
 			.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/api/dadosOng/**", "/api/publicacao/**", "/api/usuarios/**", "/api/enderecos", "/api/doacao", "/api/doacao/alterar-status/**", "/api/ongs/**")
+				.antMatchers(HttpMethod.POST, "/api/dadosOng/**", "/api/publicacao/**", "/api/usuarios/**", "/api/enderecos", "/api/doacao", "/api/doacao/alterar-status/**", "/api/ongs/**", "/api/imagem/**")
 					.permitAll()
 				.antMatchers(HttpMethod.GET, "/api/publicacao/**", "/api/enderecos/**", "/api/doacao/**", "/api/ongs/**", "/api/dadosOng/**", "/api/itensOng/**", "/api/imagem/**")
 					.permitAll()
