@@ -1,12 +1,10 @@
 package br.com.coop.coop_api.controllers;
 
-import java.io.IOException;
-import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +13,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.coop.coop_api.entities.UsuarioOng;
+import br.com.coop.coop_api.services.AmazonClient;
 import br.com.coop.coop_api.services.OngService;
-import br.com.coop.coop_api.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -29,7 +28,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OngController {
 
-	private final OngService ongService;
+	private OngService ongService;
+	private AmazonClient amazonClient;
+	
+	@Autowired
+	OngController(AmazonClient amazonClient, OngService ongService) {
+        this.amazonClient = amazonClient;
+        this.ongService = ongService;
+    }
 
 	@GetMapping()
 	public ResponseEntity<Map<String, Object>> getOngs(
@@ -99,77 +105,127 @@ public class OngController {
 		return alteraOng;
 	}
 	
+//	@PutMapping("/logo/{id}")
+//	public String saveLogo(@PathVariable("id") int id, @RequestParam("logo") MultipartFile multipartFile) throws Exception {
+//		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+//		Date date = new Date();
+//		String filePrefix = date.getTime() + "-";
+//		String uploadDir = "files";
+//		fileName = filePrefix + fileName;
+//		try {
+//			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			System.out.println("O arquivo não foi salvo");
+//			return "Error";
+//		}
+//		System.out.println("O arquivo foi salvo!");
+//		
+//		
+//		// Salva URL no BD
+//		String url = "http://localhost:8080/api/imagem/" + fileName;
+//		
+//		UsuarioOng ongBD = ongService.getIdOng(id).orElseThrow(() -> new IllegalAccessException());
+//		
+//		ongBD.setLogo(url);
+//
+//		ongService.salvaDoacao(ongBD);
+//
+//		return ongBD.getLogo();
+//	}
+	
 	@PutMapping("/logo/{id}")
-	public String saveLogo(@PathVariable("id") int id, @RequestParam("logo") MultipartFile multipartFile) throws Exception {
-		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		Date date = new Date();
-		String filePrefix = date.getTime() + "-";
-		String uploadDir = "files";
-		fileName = filePrefix + fileName;
-		try {
-			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("O arquivo não foi salvo");
-			return "Error";
-		}
-		System.out.println("O arquivo foi salvo!");
-		
-		// Salva URL no BD
-		String url = "http://localhost:8080/api/imagem/" + fileName;
-		
+	public String saveLogo(
+		@PathVariable("id") int id, 
+		@RequestPart(value = "file") MultipartFile file) throws Exception
+	{			
 		UsuarioOng ongBD = ongService.getIdOng(id).orElseThrow(() -> new IllegalAccessException());
-
-		ongBD.setLogo(url);
+		
+		ongBD.setLogo(this.amazonClient.uploadFile(file));
 
 		ongService.salvaDoacao(ongBD);
 
-		return url;
+		return ongBD.getLogo();
 	}
+	
+//	@PutMapping("/foto/{idOng}/{indice}")
+//	public String saveLogo(
+//		@PathVariable("idOng") int idOng,
+//		@PathVariable("indice") int indice,
+//		@RequestParam("foto") MultipartFile multipartFile) throws Exception 
+//	{
+//		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+//		Date date = new Date();
+//		String filePrefix = date.getTime() + "-";
+//		String uploadDir = "files";
+//		fileName = filePrefix + fileName;
+//		try {
+//			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			System.out.println("O arquivo não foi salvo");
+//			return "Error";
+//		}
+//		System.out.println("O arquivo foi salvo!");
+//		
+//		// Salva URL no BD
+//		String url = "http://localhost:8080/api/imagem/" + fileName;
+//		
+//		UsuarioOng ongBD = ongService.getIdOng(idOng).orElseThrow(() -> new IllegalAccessException());
+//
+//		switch (indice) {
+//		case 1:			
+//			ongBD.setImagem_ong_1(url);
+//			break;
+//		case 2:			
+//			ongBD.setImagem_ong_2(url);
+//			break;
+//		case 3:			
+//			ongBD.setImagem_ong_3(url);
+//			break;
+//		case 4:			
+//			ongBD.setImagem_ong_4(url);
+//			break;
+//		case 5:			
+//			ongBD.setImagem_ong_5(url);
+//			break;
+//		default:
+//			break;
+//		}
+//		
+//		ongService.salvaDoacao(ongBD);
+//
+//		return url;
+//	}
 	
 	@PutMapping("/foto/{idOng}/{indice}")
 	public String saveLogo(
 		@PathVariable("idOng") int idOng,
 		@PathVariable("indice") int indice,
-		@RequestParam("foto") MultipartFile multipartFile) throws Exception 
-	{
-		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		Date date = new Date();
-		String filePrefix = date.getTime() + "-";
-		String uploadDir = "files";
-		fileName = filePrefix + fileName;
-		try {
-			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("O arquivo não foi salvo");
-			return "Error";
-		}
-		System.out.println("O arquivo foi salvo!");
-		
-		// Salva URL no BD
-		String url = "http://localhost:8080/api/imagem/" + fileName;
-		
+		@RequestPart(value = "foto") MultipartFile file) throws Exception 
+	{		
 		UsuarioOng ongBD = ongService.getIdOng(idOng).orElseThrow(() -> new IllegalAccessException());
-
+		
+		String url = this.amazonClient.uploadFile(file);
+		
 		switch (indice) {
-		case 1:			
-			ongBD.setImagem_ong_1(url);
-			break;
-		case 2:			
-			ongBD.setImagem_ong_2(url);
-			break;
-		case 3:			
-			ongBD.setImagem_ong_3(url);
-			break;
-		case 4:			
-			ongBD.setImagem_ong_4(url);
-			break;
-		case 5:			
-			ongBD.setImagem_ong_5(url);
-			break;
-		default:
-			break;
+			case 1:			
+				ongBD.setImagem_ong_1(url);
+				break;
+			case 2:			
+				ongBD.setImagem_ong_2(url);
+				break;
+			case 3:			
+				ongBD.setImagem_ong_3(url);
+				break;
+			case 4:			
+				ongBD.setImagem_ong_4(url);
+				break;
+			case 5:			
+				ongBD.setImagem_ong_5(url);
+				break;
+			default:
+				break;
 		}
 		
 		ongService.salvaDoacao(ongBD);
