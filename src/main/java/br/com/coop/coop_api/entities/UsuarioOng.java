@@ -101,4 +101,19 @@ public class UsuarioOng {
 	
 	@Column
 	private String logo;
+	
+	@Column
+	private String imagem_ong_1;
+	
+	@Column
+	private String imagem_ong_2;
+	
+	@Column
+	private String imagem_ong_3;
+	
+	@Column
+	private String imagem_ong_4;
+	
+	@Column
+	private String imagem_ong_5;
 }

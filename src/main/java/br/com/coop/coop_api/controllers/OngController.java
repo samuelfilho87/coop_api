@@ -126,4 +126,54 @@ public class OngController {
 
 		return url;
 	}
+	
+	@PutMapping("/foto/{idOng}/{indice}")
+	public String saveLogo(
+		@PathVariable("idOng") int idOng,
+		@PathVariable("indice") int indice,
+		@RequestParam("foto") MultipartFile multipartFile) throws Exception 
+	{
+		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		Date date = new Date();
+		String filePrefix = date.getTime() + "-";
+		String uploadDir = "files";
+		fileName = filePrefix + fileName;
+		try {
+			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("O arquivo não foi salvo");
+			return "Error";
+		}
+		System.out.println("O arquivo foi salvo!");
+		
+		// Salva URL no BD
+		String url = "http://localhost:8080/api/imagem/" + fileName;
+		
+		UsuarioOng ongBD = ongService.getIdOng(idOng).orElseThrow(() -> new IllegalAccessException());
+
+		switch (indice) {
+		case 1:			
+			ongBD.setImagem_ong_1(url);
+			break;
+		case 2:			
+			ongBD.setImagem_ong_2(url);
+			break;
+		case 3:			
+			ongBD.setImagem_ong_3(url);
+			break;
+		case 4:			
+			ongBD.setImagem_ong_4(url);
+			break;
+		case 5:			
+			ongBD.setImagem_ong_5(url);
+			break;
+		default:
+			break;
+		}
+		
+		ongService.salvaDoacao(ongBD);
+
+		return url;
+	}
 }

@@ -25,8 +25,7 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin
 @RequestMapping("/api/imagem")
 @RequiredArgsConstructor
-public class ImagemController {
-	
+public class ImagemController {	
 	@GetMapping("/{nomeImagem}")
 	public ResponseEntity<byte[]> getImagem(@PathVariable String nomeImagem) throws IOException {
 	    RandomAccessFile f = new RandomAccessFile("files/" + nomeImagem, "r");
