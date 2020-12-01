@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    List<String> allowedOriginsUrl = new ArrayList<>();
 	    allowedOriginsUrl.add("http://localhost:3000");
 	    allowedOriginsUrl.add("http://127.0.0.1:3000");
+	    allowedOriginsUrl.add("https://coop-web.vercel.app");
 	    CorsConfiguration config = new CorsConfiguration();
 	    config.setAllowCredentials(true);
 
