@@ -94,26 +94,6 @@ public class UsuarioOngController {
     	return ResponseEntity.noContent().build();
     }
 	
-	@PostMapping("/savePassword")
-	public TokenDTO savePassword(@RequestBody PasswordDTO senhas) throws Exception {
-		System.out.print(senhas);
-		try {
-			UsuarioOng usuario = UsuarioOng.builder()
-					.email(senhas.getEmail())
-					.senha(senhas.getSenha()).build();
-			
-			System.out.println(usuario);
-			
-			usuarioService.autenticar(usuario);
-			
-			String token = jwtService.gerarToken(usuario);
-			
-			UsuarioOng usuarioLogado = usuarioService.getUser(senhas.getEmail()).orElseThrow(() -> new IllegalAccessException());
-			
-			return new TokenDTO(usuarioLogado.getId(), usuarioLogado.getEmail(), token);
-		} catch(UsernameNotFoundException | SenhaInvalidaException e) {
-			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
-		}
-	}
+	
 	
 }
