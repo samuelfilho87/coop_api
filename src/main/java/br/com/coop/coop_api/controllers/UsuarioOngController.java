@@ -15,7 +15,6 @@ import org.springframework.web.server.ResponseStatusException;
 import br.com.coop.coop_api.dto.AlterarSenhaDTO;
 import br.com.coop.coop_api.dto.CredenciaisDTO;
 import br.com.coop.coop_api.dto.ForgottenPasswordDTO;
-import br.com.coop.coop_api.dto.PasswordDTO;
 import br.com.coop.coop_api.dto.TokenDTO;
 import br.com.coop.coop_api.entities.UsuarioOng;
 import br.com.coop.coop_api.exceptions.SenhaInvalidaException;
